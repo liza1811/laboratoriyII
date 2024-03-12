@@ -112,7 +112,7 @@ def logout():
 
 @app.route("/")
 def index():
-
+    path1 = url_for('static', filename='img/ruk.jpg')
     path6 = url_for('static', filename='img/photo-1461749280684-dccba630e2f6.jpeg')
     path7 = url_for('static', filename='img/photo-1478432780021-b8d273730d8c.jpeg')
     path8 = url_for('static', filename='img/photo-1485579149621-3123dd979885.jpeg')
@@ -129,7 +129,7 @@ def index():
         res = dbase.getNewsJSON(),
         tecnol=dbase.getTechnJSON(),
         posts=dbase.getJSON(),
-  
+        path1=path1,
         path6=path6,
         path7=path7,
         path8=path8,

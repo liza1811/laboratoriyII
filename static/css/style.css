@@ -443,9 +443,11 @@ hr {
     padding-top: 6rem;
     padding-bottom: 6rem;
     background-color: transparent;
+    right: 100px;
   }
   .cid-u69lxE3RMk .mbr-fallback-image.disabled {
     display: none;
+    right: 100px;
   }
   .cid-u69lxE3RMk .mbr-fallback-image {
     display: block;
@@ -455,9 +457,11 @@ hr {
     height: 100%;
     position: absolute;
     top: 0;
+    
   }
   .cid-u69lxE3RMk .card-wrapper {
     background: #ffffff;
+    
   }
   @media (max-width: 767px) {
     .cid-u69lxE3RMk .card-wrapper {
@@ -487,6 +491,7 @@ hr {
     height: 120px;
     object-fit: cover;
     border-radius: 50% !important;
+    margin-right: 1%;
   }
   @media (min-width: 768px) and (max-width: 991px) {
     .cid-u69lxE3RMk .img-wrapper img {
@@ -498,6 +503,7 @@ hr {
     .cid-u69lxE3RMk .img-wrapper img {
       width: 80px;
       height: 80px;
+      margin-right: 1%;
     }
    
   }
