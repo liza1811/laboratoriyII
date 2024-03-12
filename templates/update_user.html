@@ -1,0 +1,24 @@
+{% if is_admin == 1 %}
+    <form action="{{url_for('update_user', pk=post['id'])}}" method="POST" , enctype="multipart/form-data">
+        <div class="card mb-3">
+            <div class="card-body">
+                <label class="d-flex flex-column">Имя: <input class="form-control" type="text"
+                        value="{{ post['name'] }}" name="name"> <br></label>
+
+                <label class="d-flex flex-column">Почта: <input class="form-control" type="text"
+                        value="{{ post['email'] }}" name="email"> <br></label>
+
+                <label class="d-flex flex-column">Пароль: <input class="form-control" type="text"
+                        value="{{ post['psw'] }}" name="psw"> <br></label>
+                
+                <a class="nav-link active" aria-current="page" href="{{url_for('del_user', pk=post['id'])}}" onclick="return confirm('Вы уверены, что хотите удалить пользователя?');">
+                    <span data-feather="home"></span>
+                        Удалить пользователя
+                </a>
+                <input class="form-control" type="hidden" name="id" value="{{ post['id'] }}">
+                <p><button class="form-control color-primary btn btn-primary"
+                    type="submit">Изменить</button>
+            </div>
+        </div>
+    </form>
+{% endif %}

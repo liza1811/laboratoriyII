@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <form action="{{url_for('addNew')}}" method="post", enctype="multipart/form-data">
+                <p><label>Заголовок новости: </label> <input class="form-control" type="text" name="content" value="" requied />
+                <p><input type="file" name="img">
+                <p><input class="form-control btn btn-primary" type="submit" value="Добавить"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

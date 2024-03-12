@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {{ super() }}
+    <link type="text/css" href="{{ url_for('static', filename='css/style1.css') }}" rel="stylesheet"/>
+
+    <div class="wrapper">
+        <div class="dropdown" id="dropdown">
+            <button onclick="myFunction()" class="dropbtn"> ...</button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#main">Главная</a>
+                <a href="#naszabuv">Проекты</a>
+                <a href="#news">Новости</a>
+                <a href="#kirasib">Технологии</a>
+                <a href="#testimonials-7-u69lxE3RMk">Руководитель</a>
+              <a href="#cont">Контакты</a>
+            </div>
+          </div>
+         
+        <script>
+            /* Когда пользователь нажимает на кнопку, переключаться раскрывает содержимое */
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+            // Закрыть раскрывающийся список, если пользователь щелкнет за его пределами.
+            window.onclick = function (event) {
+                if (!event.target.matches('.dropbtn')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    var i;
+                    for (i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+                }
+            }
+        </script>
+
+
+        <ul>
+            <li class="kolunoesig-lankaned" id=""></li>
+            <li class="kolunoesig-lankaned" id=""></li>
+            <li class="kolunoesig-lankaned" id=""></li>
+            <li class="kolunoesig-lankaned" id=""></li>
+            <li class="kolunoesig-lankaned" id=""></li>
+        </ul>
+        <div class="video-container" id="main">
+            <iframe src="https://www.youtube.com/embed/9HaU8NjH7bI?autoplay&#x3D;1&amp;loop&#x3D;1&amp;playlist&#x3D;9HaU8NjH7bI&amp;t&#x3D;20&amp;mute&#x3D;1&amp;playsinline&#x3D;1&amp;controls&#x3D;0&amp;showinfo&#x3D;0&amp;autohide&#x3D;1&amp;allowfullscreen&#x3D;true&amp;mode&#x3D;transparent" allowfullscreen></iframe>
+            <div class="overlay-text">Лаборатория искусственного интеллекта</div>
+            <div class="overlay"></div>
+        </div>
+        </div>
+        <div class="content mt-5">
+            <div class="about" id="dev">
+                О нас
+            </div>
+            <div class="txt">
+                Создана в 2022 году для выработки ответов на большие вызовы фундаментальной науки и индустрии,
+                связанные
+                с
+                автоматизацией обработки данных и обеспечением информационной безопасности, реализации Национальной
+                стратегии
+                развития искусственного интеллекта
+            </div>
+            <div class="about" id="naszabuv">
+                Проекты
+          </div>
+            <div class="proj">
+                  <div class="pram">
+                    {% for post in posts %}
+                        {% if post["status"] == 'public' %}
+                            <div class="child"><p class="Z">{{ post['title'] }}
+                                <p>{{ post['created'] }}
+                                <p>{{ post['content'] }}
+                                <p class="Z">{{ post['autor'] }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+          
+            <div class="scrll"></div>
+            <div class="plav-txt">
+                <div class="continuous-text">Исследования будущего *
+                    Инновации, которые меняют мир *</div>
+            </div>
+            <script>
+              const movingBlock = document.getElementById('movingBlock');
+              let position = 0;
+              let direction = 1;
+              
+              function moveText() {
+                position += direction;
+                movingBlock.style.left = position + 'px';
+              
+                if (position >= 100 || position <= 0) {
+                  direction *= -1;
+                }
+              
+                requestAnimationFrame(moveText);
+              }
+              
+              moveText();
+            </script>
+            <div class="about" id="news">
+                Новости
+            </div>
+            <div class="row row-cols-1 row-cols-md-3">
+                {% for post in res %}
+                    <div class="p-5 col-6">
+                        <div class="cardContent w-100">
+                            <div class="card__cover">
+                                <img src=".{{ post['img'] }}" class="card-img-top">
+                            </div>
+                            <h5 class="card-title">{{ post['summary'] }}</h5>
+                            <p class="card-description" data-fulltext="{{ post['content'] }}" style="display: none;">{{ post['short_content'] }}</p>
+                            <button class="read-more-btn"><span></span>Узнать подробнее</button>
+                            <div class="form-hidden" style="display: none;">{{ post['content'] }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <!-- The modal popup -->
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <img id="modalImage" src="" width="100%">
+                    <div class= "p" id="modalContent"></div>
+                </div>
+            </div>
+            
+            <script>
+                var readMoreBtns = document.querySelectorAll('.read-more-btn');
+            
+                readMoreBtns.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var contentShort = this.parentNode.querySelector('.card-description');
+                        var contentFull = contentShort.getAttribute('data-fulltext');
+                        var formHidden = this.parentNode.querySelector('.form-hidden');
+                        
+                        contentShort.style.display = 'none';
+            
+                        var modal = document.getElementById("myModal");
+                        var modalContent = document.getElementById("modalContent");
+                        var modalImage = document.getElementById("modalImage");
+            
+                        modalContent.innerHTML = contentFull;
+                        modalImage.src = this.parentNode.querySelector('.card-img-top').src;
+            
+                        formHidden.style.display = 'block';
+                        modal.style.display = "block";
+            
+                        document.querySelector('.close').addEventListener('click', function() {
+                            modal.style.display = "none";
+                            modal.style.display = "none";
+                            formHidden.style.display = 'none'; // Добавлено скрытие form-hidden при закрытии модального окна
+                        });
+                    });
+                });
+            </script>
+           
+            <div class="gallery">
+                <div class="gallery-wrapper">
+                  <img class="gallery-image" src="{{ path6 }}" alt="Photo 1">
+                  <img class="gallery-image" src="{{ path7 }}" alt="Photo 2">
+                  <img class="gallery-image" src="{{ path8 }}" alt="Photo 3">
+                  <img class="gallery-image" src="{{ path9 }}" alt="Photo 4">
+                  <img class="gallery-image" src="{{ path10 }}" alt="Photo 5">
+                </div>
+              </div>
+              <script>
+              const galleryWrapper = document.querySelector('.gallery-wrapper');
+                galleryWrapper.innerHTML += galleryWrapper.innerHTML;
+              </script>
+            <div class="about" id="kirasib">
+                Технологии
+            </div>
+            {% for tecn in tecnol %}
+                <div class="technolog">
+                    <div class="perTech">
+                        <div class="childTech">
+                            <details>
+                                <summary>{{ tecn['summary'] }}</summary>
+                                <p>{{ tecn['content'] }}</p>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <hr>
+
+           
+                <section class="people06 cid-u69lxE3RMk" id="testimonials-7-u69lxE3RMk">   
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="card col-12 col-md-12 col-lg-8">
+                                <div class="card-wrapper">
+                                    <div class="card-box align-center">
+                                        <p class="card-text mbr-fonts-style display-5">
+                                        Лаборатория искусственного интеллекта - место, где рождаются идеи будущего!
+                                        </p>
+                                        <div class="img-wrapper mt-3 justify-content-center">
+                                            <img src="{{ path1 }}" >
+                                        </div>
+                                        <p class="card-title mbr-fonts-style mt-3 display-7">
+                                            <strong>Руководитель лаборатории</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+    
+       
+           
+
+        <hr>
+        <div class="position-relative">
+           
+            
+                <form class="form1" action="{{ url_for('send_mail') }}" method="post" id="form__feedback">
+                   
+                    <h3 class="form2">Написать нам</h3>
+                    <input class="form3" type="text" name="name" placeholder="Имя" required>
+                    <input class="form4" type="email" name="email" placeholder="Email" required>
+                    <textarea class="form5" name="text" id="" rows="2"
+                              placeholder="Введите текст"></textarea>
+                    <button type="submit" class="form6">Отправить форму</button>
+                </form>
+               
+            </div>
+            
+        </div>
+    </div>
+{% endblock %}

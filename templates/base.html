@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link type="text/css" href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <style>
+        .header {
+            max-width: 900px; /* Максимальная ширина 600px для улучшения адаптивности */
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin: 20px  auto 0;
+            padding: 10px;
+           
+            background-color:#ffffff96;;
+            border-radius: 30px; /* Добавляем скругление углов для header'a */
+            
+        }
+        
+        .header__inner {
+            margin-right: 10px;
+            align-items: center;
+            background-color: gba(255, 255, 255);
+         
+        }
+        .login-button {
+            background-color: #56B883; /* Цвет фона кнопки */
+            color: #fff; /* Цвет текста кнопки */
+            padding: 10px 20px; /* Внутренние отступы кнопки */
+            
+            margin-left: auto; /* Поместить кнопку вправо внутри flex-контейнера */
+            border-radius: 35px;
+            font-family: 'Roboto', sans-serif;
+            opacity: 1;
+           
+        }
+        /* Медиа-запрос для адаптивного дизайна на мобильных устройствах */
+        @media only screen and (max-width: 600px) {
+            .header {
+                width: 70%; /* Уменьшаем ширину header'a до 90% на мобильных устройствах */
+                border-radius: 10px; /* Уменьшаем скругление углов на мобильных устройствах */
+                flex-direction: column;
+                text-align: center;
+            }
+            .login-button {
+                font-size: 15px;
+            }
+            .header > a {
+                font-size: 15px;
+                
+            }
+        }
+    </style>
+    <div class="header">
+        {% if auth_user == 'False' %}
+        <a href="{{ url_for('login') }}" class="login-button">
+            Войти
+        </a>
+        {% else %}
+        <a href="{{ url_for('post_admin') }}" class="login-button">
+            Профиль
+        </a>
+        {% endif %}
+
+    </div>
+    <div class="body__content">
+        {% block content -%}
+
+        {%- block mainmenu -%}
+        <ul class="mainmenu">
+
+        </ul>
+        {% endblock mainmenu -%}
+        <div class="clear"></div>
+
+        {% endblock -%}
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

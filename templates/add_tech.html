@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ super() }}
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <form action="{{url_for('addTech')}}" method="post" class="form-contact">
+                <p><label>Описание технолгии: </label> <input class="form-control" type="text" name="summary" value="" requied />
+                <p><label>Текст технологии: </label>
+                <p><textarea class="form-control" name="content" rows=7 cols=40></textarea>
+                <p><input class="form-control btn btn-primary" type="submit" value="Добавить"/>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
