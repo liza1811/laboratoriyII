@@ -97,8 +97,9 @@ hr {
 .scrll{
     background-image:  url('photo-1516251193007-45ef944ab0c6.jpeg');
     height: 60vw;
-    width: 165%;
-    margin-left: -45%;
+    width: 145%;
+    margin-left: -15%;
+    margin-left: -25%;
     position: relative;
     background-color: #000;
     background-attachment: fixed;
@@ -122,9 +123,10 @@ hr {
   .plav-txt{
     background-color:#3c7e5b;;
     position: relative;
-    width: 140%;
+    width: 145%;
+    margin-left: -25%;
     height: 10vw;
-    margin-left: -20%;
+    
     overflow: hidden;
    
 
@@ -148,10 +150,11 @@ hr {
         margin-top: 10%;
         }
 .gallery {
-    width: 140%;
+    width: 145%;
+    margin-left: -25%;
     overflow: hidden;
     height: 20%;
-    margin-left: -20%;
+   
   }
   
   .gallery-wrapper {
@@ -181,11 +184,17 @@ hr {
     .continuous-text {
       font-size: 19px; /* Пример размера шрифта для мобильных устройств */
     }
+    .gallery {
+        width: 111%;
+        margin-left: -5%;
+
+       
+      }
     .plav-txt{
 
-        width: 100%;
+        width: 112%;
         height: 10vw;
-        margin-left: 0%;
+        margin-left: -6%;
 
     }
 }
@@ -284,9 +293,9 @@ ul li a:hover {
     }
     .scrll{
 
-        height: 130vw;
+        height: 135vw;
         width: 100vw;
-        margin-left: 0;
+        margin-left: -6%;
     }
 }
 .txt {
@@ -478,9 +487,7 @@ form-inner {
     white-space: normal;
 }
 .read-more-btn{
-    background-color: #277049;
-    border-radius: 20px;
-    text-align: center;
+  
     font-size: 17px;
     
 }
@@ -518,8 +525,8 @@ form-inner {
     margin: 0;
     float:none;
     height: auto;
-    margin-bottom: 38%;
-    border-radius: 10%;
+    margin-bottom: 58%;
+    
 }
 .card-description{
     margin-top: auto;
@@ -528,7 +535,7 @@ form-inner {
 }
 .card-title {
     margin-bottom: 0.05rem;
-    margin-top: -30%;
+    margin-top: -45%;
     font-weight: 1000;
 }
 h5, h5 {
