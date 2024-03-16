@@ -65,16 +65,18 @@ def get_db():
         g.link_db = connect_db()
     return g.link_db
 
-@app.route("/get_all_users")
+@app.route("/get_all_users", methods=['POST', 'GET'])
 @login_required
 def get_all_users():
-    res = dbase.getAllUsers()
-    return render_template(
-        'all_users.html',
-        data=res,
-        user_name=current_user.get_name(),
-        is_admin=int(current_user.get_admin())
-    )
+    
+    if request.method == "POST":
+        if request.form['psw'] == request.form['psw2']:
+            res = dbase.addUser(
+                request.form['name'], request.form['email'], request.form['psw'])
+            if res:
+                return redirect(url_for('get_all_users'))
+        return render_template('all_users.html', data=dbase.getAllUsers(), user_name=current_user.get_name(), is_admin=int(current_user.get_admin()))
+    return render_template('all_users.html', data=dbase.getAllUsers(), user_name=current_user.get_name(), is_admin=int(current_user.get_admin()))
 
 
 @app.route('/register', methods=['POST', 'GET'])
@@ -143,11 +145,16 @@ def index():
 @app.route('/send_mail', methods=['GET', 'POST'])
 def send_mail():
     if request.method == 'POST':
-        msg = Message("Обратная связь", sender='elizavetka.manakova02@mail.ru', recipients=[request.form['email']])
-        msg.body = request.form['text']
-        mail.send(msg)
-    return render_template('mail.html')
-
+        try:
+            msg = Message("Обратная связь", sender='elizavetka.manakova02@mail.ru', recipients=['elizavetka.manakova02@mail.ru'])
+            msg.body = f"Сообщение от {request.form['name']}. Текст сообщения:{request.form['text']}. Почта для обратной связи:{request.form['email']}"
+            mail.send(msg)
+            flash('Email successfully sent!', 'success')
+            return redirect(url_for('send_mail'))
+        except Exception as e:
+            flash(f'An error occurred: {str(e)}', 'error')
+            return redirect(url_for('send_mail'))
+    return render_template('index.html')
 
 @app.route('/post_admin', methods=["POST", "GET"])
 @login_required

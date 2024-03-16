@@ -45,6 +45,9 @@
 			.glop{
 			display:block;
 		}
+		.m3{
+            display: none;
+            }
 	}
 	</style>
 </head>
@@ -56,21 +59,22 @@
 			<a class="navbar-brand" href="#"></a>
 			<div class="d-flex align-items-center">
 
-				<span class="me-3">Привет, {{user_name}}</span>
+				<span class="m3 me-3">Привет, {{user_name}}</span>
 				<a href="{{ url_for('index') }}" class="btn btn-outline-secondary me-4">Главная</a>
-				<a class="btn btn-outline-secondary me-4" href="{{url_for('addPost')}}">Добавить статью</a>
+				<a class="btn btn-outline-secondary me-4" href="{{url_for('addPost')}}">Добавить проект</a>
 				<a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Выход</a>
 			</div>
 		</div>
 	</nav>
-	<button class=" glop btn btn-outline-secondary me-4" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon">...</span>
-		</button>
+
 	  
 
 	<div class="container-fluid">
 		<div class="row">
 			{% if is_admin == 1 %}
+			<button class=" glop btn btn-outline-secondary me-4" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon">...</span>
+				</button>
 			<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
 				<div class="position-sticky pt-3">
 					<ul class="nav flex-column">

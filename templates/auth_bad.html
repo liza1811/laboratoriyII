@@ -6,3 +6,67 @@
     </form>  
     
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/auth_bad.css') }}">
+
+
+    <a onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="login-button">
+      Войти
+  </a>
+  <form action="{{ url_for('login') }}" method="post" class="form-horizontal">
+    <span class="heading">АВТОРИЗАЦИЯ</span>
+    <div class="form-group">
+        <input type="text" class="form-control" id="inputEmail" placeholder="E-mail" name="email" value=""
+            requied>
+        <i class="fa fa-user"></i>
+    </div>
+    <div class="form-group help">
+        <input type="password" class="form-control" name="psw" value="" requied placeholder="Password">
+        <i class="fa fa-lock"></i>
+        <a href="#" class="fa fa-question-circle"></a>
+    </div>
+    <div class="form-group">
+        <div class="main-checkbox">
+            <input type="checkbox" value="none" id="checkbox1" name="check"/>
+            <label for="checkbox1"></label>
+            </div>
+            <span class="text">Запомнить</span>
+        <input type="submit" value="Войти" class="btn btn-default" />
+    </div>
+</form>
+
+  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="{{ url_for('login') }}" method="post" >
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+      <img src="img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
+
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+        
+      <input type="submit"  value="Войти" class="btn btn-default" />
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>

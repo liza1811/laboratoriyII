@@ -36,6 +36,22 @@
             color: white;
             /* Цвет текста для активной ссылки */
         }
+        .glop{
+			display:none;
+		}
+		@media screen and (max-width: 768px) {
+			.glop{
+			display:block;
+		}
+        .m3{
+            display: none;
+            }
+            .im3{
+                height: auto!important;
+                width: 60%!important;
+            }
+    }
+      
     </style>
 </head>
 
@@ -46,7 +62,7 @@
             <a class="navbar-brand" href="#"></a>
             <div class="d-flex align-items-center">
 
-                <span class="me-3">Привет, {{user_name}}</span>
+                <span class="m3 me-3">Привет, {{user_name}}</span>
                 <a href="{{ url_for('index') }}" class="btn btn-outline-secondary me-4">Главная</a>
                 <a class="btn btn-outline-secondary me-4" href="{{url_for('addNew')}}">Добавить новость</a>
                 <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Выход</a>
@@ -54,7 +70,15 @@
         </div>
     </nav>
 
-
+	<script>
+		// Добавьте обработчик события для кнопки, чтобы открывать и закрывать боковое меню
+		document.querySelector('.navbar-toggler').addEventListener('click', function() {
+		  document.getElementById('sidebarMenu').classList.toggle('show');
+		});
+		</script>
+		<button class=" glop btn btn-outline-secondary me-4" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon">...</span>
+			</button>
     <div class="container-fluid">
         <div class="row">
             {% if is_admin == 1 %}
@@ -72,7 +96,7 @@
                             </a>
                             <a class="nav-link active" aria-current="page" href="{{ url_for('post_admin') }}">
                                 <span data-feather="home"></span>
-                                Статьи
+                                Публикации
                             </a>
                             <a class="nav-link active" aria-current="page" href="{{ url_for('get_all_users') }}">
                                 <span data-feather="home"></span>
@@ -103,7 +127,7 @@
                 <form action="{{url_for('updateNew')}}" method="POST" , enctype="multipart/form-data">
                     <div class="card mb-3">
                         <div class="card-body">
-                            <img src=".{{ post['img'] }}" style="width: 762x; height: 459px; object-fit: cover;">
+                            <img src=".{{ post['img'] }}" class="im3" style="width: 762x; height: 459px; object-fit: cover;">
                             <label class="d-flex flex-column">Заголовок<input class="form-control" type="text"
                                     value="{{ post['summary'] }}" name="summary"> <br></label>
                             <label class="d-flex flex-column">Контент<textarea class="form-control"

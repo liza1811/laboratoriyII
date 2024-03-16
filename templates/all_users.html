@@ -10,11 +10,12 @@
 	<style>
 		/* Стили для бокового меню */
 		#sidebarMenu {
+			
 			min-height: 100vh;
 			/* Высота на всю высоту вьюпорта */
 			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 			/* Тень для бокового меню */
-			z-index: 1000;
+	
 			/* Устанавливаем z-index, чтобы меню было поверх основного контента */
 		}
 
@@ -36,6 +37,143 @@
 			color: white;
 			/* Цвет текста для активной ссылки */
 		}
+		.glop{
+			display:none;
+		}
+		@media screen and (max-width: 768px) {
+			.glop{
+			display:block;
+		}
+		.m3{
+            display: none;
+            }
+	}
+		input[type=text], input[type=password] {
+			width: 100%;
+			padding: 15px;
+			margin: 5px 0 22px 0;
+			display: inline-block;
+			border: none;
+			background: #f1f1f1;
+			border-radius: 25px;
+		}
+		
+		/* Add a background color when the inputs get focus */
+		input[type=text]:focus, input[type=password]:focus {
+			background-color: #ddd;
+			outline: none;
+		}
+		
+		/* Set a style for all buttons */
+		button {
+			background-color: #4CAF50;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			cursor: pointer;
+			width: 100%;
+			opacity: 0.9;
+		}
+		
+		.bt:hover {
+			opacity:1;
+		}
+		.bt {
+			background-color: #4CAF50;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			cursor: pointer;
+			width: 100%;
+			opacity: 0.9;
+		}
+		
+		button:hover {
+			opacity:1;
+		}
+		/* Extra styles for the cancel button */
+		.cancelbtn {
+			padding: 14px 20px;
+			background-color: #f44336;
+		}
+		
+		/* Float cancel and signup buttons and add an equal width */
+		.cancelbtn, .signupbtn {
+		  float: left;
+		  width: 45%;
+		  margin-right: 5%;
+		  height: 50px;
+		}
+		
+		/* Add padding to container elements */
+		.container {
+			padding: 16px;
+			max-width:740px;
+		}
+		
+		/* The Modal (background) */
+		.modal {
+			display: none; /* Hidden by default */
+			position: fixed; /* Stay in place */
+			z-index: 1; /* Sit on top */
+			left: 0;
+			top: 0;
+			width: 100%; /* Full width */
+			height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: #b0b0b0;;
+			padding-top: 50px;
+		}
+		
+		/* Modal Content/Box */
+		.modal-content {
+			z-index: 1001;
+			background-color: #fefefe;
+			margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+			border: 1px solid #888;
+			width: 80%; /* Could be more or less, depending on screen size */
+		}
+		
+		/* Style the horizontal ruler */
+		hr {
+			border: 1px solid #f1f1f1;
+			margin-bottom: 25px;
+		}
+		 
+		/* The Close Button (x) */
+		.close {
+			position: absolute;
+			right: 35px;
+			top: 15px;
+			font-size: 40px;
+			font-weight: bold;
+			color: #f1f1f1;
+		}
+		
+		.close:hover,
+		.close:focus {
+			color: #f44336;
+			cursor: pointer;
+		}
+		
+		/* Clear floats */
+		.clearfix::after {
+			content: "";
+			clear: both;
+			display: table;
+		}
+		
+		/* Change styles for cancel button and signup button on extra small screens */
+		@media screen and (max-width: 300px) {
+			.cancelbtn, .signupbtn {
+			   width: 100%;
+			}
+		}
+	
+      
+		</style>
 	</style>
 </head>
 
@@ -46,17 +184,83 @@
 			<a class="navbar-brand" href="#"></a>
 			<div class="d-flex align-items-center">
 
-				<span class="me-3">Привет, {{user_name}}</span>
+				<span class="m3 me-3">Привет, {{user_name}}</span>
 				<a href="{{ url_for('index') }}" class="btn btn-outline-secondary me-4">Главная</a>
 				{% if is_admin == 1 %}
-				<a class="btn btn-outline-secondary me-4" href="{{url_for('register')}}">Добавить пользователя</a>
+				<a class="btn btn-outline-secondary me-4" onclick="document.getElementById('id01').style.display='block'" id="reg" >Добавить пользователя</a>
 				{% else %}
 				{% endif %}
 				<a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Выход</a>
 			</div>
 		</div>
 	</nav>
-
+	
+{% if is_admin == 1 %}
+<div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+    <form class="modal-content" action="{{ url_for('get_all_users') }}" method="post" id="reg">
+        <div class="container">
+            <h1>Регистрация</h1>
+            <p>Пожалуйста, заполните эту форму, чтобы создать учетную запись.</p>
+            <hr>
+            <label><b>Имя:</b> </label> <input type="text" name="name" value="" required />
+            <p><label><b>Email:</b> </label> <input type="text" name="email" value="" required /></p>
+            <p><label><b>Пароль: </b></label> <input type="password" name="psw" value="" required /></p>
+            <p><label><b> Повтор пароля:</b> </label> <input type="password" name="psw2" value="" required /></p>
+            
+            <div class="clearfix">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Отмена</button>
+                <input type="submit" class="signupbtn bt" value="Регистрация">
+            </div>
+        </div>
+    </form>
+</div>
+{% endif %}
+<script>
+	$('#reg').submit(function(event) {
+		event.preventDefault();
+		$.ajax({
+			type: 'POST',
+			url: '/get_all_users',
+			data: $(this).serialize(),
+			success: function(response) {
+				if (response.error) {
+					$('#errorMessage').text(response.error).show();
+				} else {
+					location.reload();
+				}
+			},
+			error: function(xhr, status, error) {
+				$('#errorMessage').text("Error: " + error).show();
+			}
+		});
+	});
+</script>
+<script>
+	document.getElementById('reg').addEventListener('click', function() {
+	  document.getElementById('sidebarMenu').style.display = 'none';
+	});
+	</script>
+	  <script>
+	  // Get the modal
+	  var modal = document.getElementById('id01');
+	  
+	  // When the user clicks anywhere outside of the modal, close it
+	  window.onclick = function(event) {
+		  if (event.target == modal) {
+			  modal.style.display = "none";
+		  }
+	  }
+	  </script>
+	<script>
+		// Добавьте обработчик события для кнопки, чтобы открывать и закрывать боковое меню
+		document.querySelector('.navbar-toggler').addEventListener('click', function() {
+		  document.getElementById('sidebarMenu').classList.toggle('show');
+		});
+		</script>
+		<button class=" glop btn btn-outline-secondary me-4" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon">...</span>
+			</button>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -75,7 +279,7 @@
 							</a>
 							<a class="nav-link active" aria-current="page" href="{{ url_for('post_admin') }}">
 								<span data-feather="home"></span>
-								Статьи
+								Публикации
 							</a>
 							<a class="nav-link active" aria-current="page" href="{{ url_for('get_all_users') }}">
 								<span data-feather="home"></span>
