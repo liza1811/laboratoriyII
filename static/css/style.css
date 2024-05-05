@@ -510,6 +510,9 @@ hr {
     background: #ffffff;
     
   }
+  .block{
+top: 30px;
+  }
   @media (max-width: 767px) {
     .cid-u69lxE3RMk .card-wrapper {
       padding: 2rem 1.5rem;
