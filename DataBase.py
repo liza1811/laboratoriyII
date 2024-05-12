@@ -1,6 +1,6 @@
 import sqlite3
 import datetime
-
+from werkzeug.security import generate_password_hash
 
 class DataBase:
     def __init__(self, db):
@@ -155,7 +155,7 @@ class DataBase:
         return []
 
 
-    def addUser(self, name, email, hpsw):
+    def addUser(self, name, email, psw):
         try:
             self.__cur.execute(
                 f"SELECT COUNT() as `count` FROM users WHERE email LIKE '{email}' ")
@@ -163,13 +163,14 @@ class DataBase:
             if res['count'] > 0:
                 print("Пользователь с таким email уже существует")
                 return False
+            hpsw = generate_password_hash(psw)
             self.__cur.execute(
                 "INSERT INTO users VALUES(NULL, ?, ?, ?, ?)", (name, email, hpsw, 0))
             self.__db.commit()
         except sqlite3.Error as e:
             print("Ошибка добавления пользователя в БД "+str(e))
             return False
-        return True
+        return True 
     
     def delUser(self, user_id):
         self.__cur.execute(

@@ -95,7 +95,7 @@ def register():
 def login():
     if request.method == "POST":
         user = dbase.getUserByEmail(request.form['email'])
-        if user and (user['psw'] == request.form['psw']):
+        if user and check_password_hash(user['psw'], request.form['psw']):
             userLogin = UserLogin().create(user)
             login_user(userLogin)
             return redirect(url_for('post_admin'))
@@ -273,7 +273,7 @@ def update_user(pk):
         res = dbase.updateUser(
             request.form['name'],
             request.form['email'],
-            request.form['psw'],
+            generate_password_hash(request.form['psw']),
             pk
         )
         if not res:
