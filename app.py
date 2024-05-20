@@ -94,15 +94,29 @@ def register():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
-        user = dbase.getUserByEmail(request.form['email'])
-        if user and check_password_hash(user['psw'], request.form['psw']):
-            userLogin = UserLogin().create(user)
-            login_user(userLogin)
-            return redirect(url_for('post_admin'))
-
-        elif not user:
-            flash('Пользователь не найден', category='error')
+            user = dbase.getUserByEmail(request.form['email'])
+            if user and check_password_hash(user['psw'], request.form['psw']):
+                userLogin = UserLogin().create(user)
+                login_user(userLogin)
+                return redirect(url_for('post_admin'))
+            elif not user:
+                flash('Пользователь не найден', category='error')
+       
     return render_template("login.html", menu=dbase.getMenu())
+
+@app.route('/send_mail', methods=['GET', 'POST'])
+def send_mail():
+    if request.method == 'POST':
+        try:
+            msg = Message("Обратная связь", sender='elizavetka.manakova02@mail.ru', recipients=['elizavetka.manakova02@mail.ru'])
+            msg.body = f"Сообщение от {request.form['name']}. Текст сообщения:{request.form['text']}. Почта для обратной связи:{request.form['email']}"
+            mail.send(msg)
+            flash('Email successfully sent!', 'success')
+            return redirect(url_for('send_mail'))
+        except Exception as e:
+            flash(f'An error occurred: {str(e)}', 'error')
+            return redirect(url_for('send_mail'))
+    return render_template('index.html')
 
 
 @app.route('/logout')
@@ -141,21 +155,6 @@ def index():
         auth_user=str(current_user.is_authenticated),
         is_admin=is_admin
     )
-
-@app.route('/send_mail', methods=['GET', 'POST'])
-def send_mail():
-    if request.method == 'POST':
-        try:
-            msg = Message("Обратная связь", sender='elizavetka.manakova02@mail.ru', recipients=['elizavetka.manakova02@mail.ru'])
-            msg.body = f"Сообщение от {request.form['name']}. Текст сообщения:{request.form['text']}. Почта для обратной связи:{request.form['email']}"
-            mail.send(msg)
-            flash('Email successfully sent!', 'success')
-            return redirect(url_for('send_mail'))
-        except Exception as e:
-            flash(f'An error occurred: {str(e)}', 'error')
-            return redirect(url_for('send_mail'))
-    return render_template('index.html')
-
 @app.route('/post_admin', methods=["POST", "GET"])
 @login_required
 def post_admin():

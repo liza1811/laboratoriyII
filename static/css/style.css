@@ -615,7 +615,7 @@ top: 30px;
     border-radius: 30px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, sans-serif;
     font-weight: 20;
-    width: 31.5%;
+    width: 51.5%;
 }
 @media (max-width: 768px) {
     .child {
