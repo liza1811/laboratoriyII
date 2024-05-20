@@ -1,24 +1,38 @@
 <!DOCTYPE html>
-</head>
-<body>
+<html>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link type="text/css" href="{{ url_for('static', filename='css/style-login.css') }}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
+</head>
+<body>
     <a href="{{ url_for('index') }}" class="back-to-home"><i class="fas fa-arrow-left"></i> На главную</a>
-  <form class="modal-content animate" action="{{ url_for('login') }}" method="post" >
-    <div class="container">
-      <label for="uname"><b>Логин</b></label>
-      <input type="text" placeholder="Введите логин" name="email" required>
+    <form class="modal-content animate" action="{{ url_for('login') }}" method="post">
+        <div class="container">
+            <label for="uname"><b>Логин</b></label>
+            <input type="text" placeholder="Введите логин" name="email" required>
 
-      <label for="psw"><b>Пароль</b></label>
-      <input type="password" placeholder="Введите пароль" name="psw" required>
-        
-      <input type="submit"  value="Войти" class="btn btn-default" />
+            <label for="psw"><b>Пароль</b></label>
+            <input type="password" placeholder="Введите пароль" name="psw" required>
+            
+            <input type="submit" value="Войти" class="btn btn-default" />
+        </div>
+    </form>
+    
+    <!-- Pop-up Notification -->
+    <div class="alert alert-success">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+
     </div>
-
-   
-  </form>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 </body>
 </html>

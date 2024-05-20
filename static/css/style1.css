@@ -390,7 +390,7 @@ form-inner {
 }
 .card-title {
 
-    margin-top: -10%;
+    margin-top: -20%;
     font-weight: 900;
 }
 .card__cover > img{
@@ -399,7 +399,7 @@ form-inner {
     float:none;
     height: auto;
 
-    margin-bottom: 10%;
+    margin-bottom: 20%;
     transition: transform 0.3s ease,  filter 0.3s ;
 }
 .card__cover img:hover {
@@ -542,7 +542,7 @@ form-inner {
 }
 .card-title {
     margin-bottom: 0.05rem;
-    margin-top: -45%;
+    margin-top: -65%;
     font-weight: 1000;
 }
 h5, h5 {
@@ -558,6 +558,13 @@ p {
 .p-5 {
     padding: 0.6rem!important;
     margin-bottom: inherit;
+}
+@media screen and (max-width: 768px)
+{
+.p-5 {
+    padding: 0.6rem !important;
+    margin-bottom: 20%;
+}
 }
 .about {
     font-size: 60px;
