@@ -145,23 +145,7 @@ footer p {
     margin: 0 auto;
     padding: 0 20px;
 }
-.video-container {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%; /* 16:9 аспектное соотношение */
-   
-}
 
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    align-items: flex-end;
-}
 
 .overlay {
     position: absolute;
@@ -187,40 +171,26 @@ footer p {
     font-family:'Courier New', Courier, monospace ;
     
 }
-@media (max-width: 991px) and (min-width: 768px) {
-    .video-container iframe {
-        position: relative;
-        top: 0;
-       
-        right: -100%;
-        width: 1500px; /* 100% of viewport width */
-        height: 100vh; /* 100% of viewport height */
-        margin-right: 200px;
-    }
-    .txt{
-        font-size: 15px;
-    }
-  }
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 @media (max-width: 768px) {
-    .video-container {
-
-        width: 100%;
-  height: 100vh; /* устанавливаем высоту контейнера равной высоте видимой области экрана */
+    .overlay-text {
+        font-size: 25px;
     }
-
-    .video-container iframe {
-        position: relative;
-        top: 0;
-        left: -250px;
-       
-        width: 1800px; /* 100% of viewport width */
-        height: 100vh; /* 100% of viewport height */
-        margin-right: 200px;
-    }
-    .txt{
+    .txt {
         font-size: 5px;
     }
-    .about{
+    .about {
         font-size: 1px;
     }
 }

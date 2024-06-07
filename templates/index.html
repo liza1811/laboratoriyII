@@ -50,6 +50,42 @@
             <div class="overlay-text">Лаборатория искусственного интеллекта</div>
             <div class="overlay"></div>
         </div>
+    <script>
+        const videoContainer = document.getElementById('main');
+
+// Добавляем обработчик события на изменение размера окна
+window.addEventListener('resize', resizeVideo);
+
+// Функция для изменения размера видео
+function resizeVideo() {
+  // Получаем размер контейнера
+  const containerWidth = videoContainer.offsetWidth;
+  const containerHeight = videoContainer.offsetHeight;
+
+  // Вычисляем оптимальное соотношение сторон для видео
+  const videoAspectRatio = 16 / 9;
+  const containerAspectRatio = containerWidth / containerHeight;
+
+  // Если контейнер уже имеет правильное соотношение сторон, ничего не делаем
+  if (containerAspectRatio === videoAspectRatio) {
+    return;
+  }
+
+  // Если контейнер шире, чем видео, увеличиваем видео до ширины контейнера
+  if (containerAspectRatio > videoAspectRatio) {
+    videoContainer.style.width = '100%';
+    videoContainer.style.height = 'auto';
+  }
+  // Если контейнер выше, чем видео, увеличиваем видео до высоты контейнера
+  else {
+    videoContainer.style.width = 'auto';
+    videoContainer.style.height = '100%';
+  }
+}
+
+// Вызываем функцию для первоначальной настройки размера видео
+resizeVideo();
+</script>
         </div>
         <div class="content mt-5">
             <div class="about" id="dev">
@@ -106,11 +142,11 @@
             <div class="about" id="news">
                 Новости
             </div>
-            <div class="row row-cols-1 row-cols-md-3">
+            <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 g-4" >
                 {% for post in res %}
-                    <div class="p-5 col-6">
+                    <div class="p-5 col-6 ">
                         <div class="cardContent w-100">
-                            <div class="card__cover">
+                            <div class="card h-100">
                                 <img src=".{{ post['img'] }}" class="card-img-top">
                             </div>
                             <h5 class="card-title">{{ post['summary'] }}</h5>
@@ -213,12 +249,7 @@
                         </div>
                     </div>
                 </section>
-                
-    
-       
-           
-
-        <hr>
+            
         <div class="position-relative">
            
             

@@ -366,6 +366,9 @@ form-inner {
 }
 
 .cardContent{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     width: 24%;
     position: relative;
     box-sizing: border-box;
@@ -383,6 +386,7 @@ form-inner {
     border-radius: 20px;
 }
 .card__cover{
+    aspect-ratio: 1/1;
     width: 100%;
     border-radius: 0px;
     overflow: hidden;
@@ -390,15 +394,14 @@ form-inner {
 }
 .card-title {
 
-    margin-top: -20%;
-    font-weight: 900;
+    font-weight: 700;
 }
 .card__cover > img{
     width: 70%;
     margin: 0;
     float:none;
     height: auto;
-
+    object-fit: cover;
     margin-bottom: 20%;
     transition: transform 0.3s ease,  filter 0.3s ;
 }
@@ -409,6 +412,28 @@ form-inner {
     margin-top: 20px;
     padding: 0 !important;
 }
+@media (max-width: 767px) {
+    .row {
+      --bs-gutter-x: 1rem;
+      --bs-gutter-y: 1rem;
+    }
+  
+    .row > * {
+      width: 50%;
+    }
+  
+    .card__cover > img {
+      width: 100%;
+      margin-bottom: 10%;
+    }
+  
+    .card-title,
+    .card-description,
+    .read-more-btn {
+      position: relative;
+      z-index: 1;
+    }
+  }
 .about:after {
     content: "";
     display: block;
@@ -478,6 +503,10 @@ form-inner {
         background-color: #333;
         color: #fff;
       }
+      .card{
+        background-color: rgba(255, 255, 255, 0);
+        border-color:  rgba(255, 255, 255, 0);
+    }
 @media screen and (max-width: 768px) {
 .cardContent{
     width: 50%;
@@ -542,9 +571,10 @@ form-inner {
 }
 .card-title {
     margin-bottom: 0.05rem;
-    margin-top: -65%;
+
     font-weight: 1000;
 }
+
 h5, h5 {
     font-size: 1rem;
 }
