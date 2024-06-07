@@ -19,20 +19,37 @@
         </div>
     </form>
     
-    <!-- Pop-up Notification -->
-    <div class="alert alert-success">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-
-    </div>
     
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert {% if category == 'error' %}{% else %}success{% endif %}">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<script>
+window.addEventListener('load', function() {
+  // Получаем все блоки с классом "alert"
+  var alerts = document.querySelectorAll('.alert');
+
+  // Перебираем все блоки и добавляем им анимацию
+  for (var i = 0; i < alerts.length; i++) {
+    // Добавляем класс для анимации появления
+    alerts[i].classList.add('fade-in');
+
+    // Через 5 секунд удаляем блок
+    setTimeout(function(alert) {
+      alert.classList.remove('fade-in');
+      alert.classList.add('fade-out');
+      setTimeout(function() {
+        alert.parentNode.removeChild(alert);
+      }, 300);
+    }, 3000, alerts[i]);
+  }
+});
+</script>
 </body>
 </html>

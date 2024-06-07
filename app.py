@@ -90,18 +90,17 @@ def register():
                 return redirect(url_for('get_all_users'))
     return render_template('register.html', is_admin=int(current_user.get_admin()))
 
-
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
-            user = dbase.getUserByEmail(request.form['email'])
-            if user and check_password_hash(user['psw'], request.form['psw']):
-                userLogin = UserLogin().create(user)
-                login_user(userLogin)
-                return redirect(url_for('post_admin'))
-            elif not user:
-                flash('Пользователь не найден', category='error')
-       
+        user = dbase.getUserByEmail(request.form['email'])
+        if user and check_password_hash(user['psw'], request.form['psw']):
+            userLogin = UserLogin().create(user)
+            login_user(userLogin)
+            return redirect(url_for('post_admin'))
+        else:
+            flash('Неправильный email или пароль', category='error')
+            return render_template("login.html", menu=dbase.getMenu(), error=True)
     return render_template("login.html", menu=dbase.getMenu())
 
 @app.route('/send_mail', methods=['GET', 'POST'])
